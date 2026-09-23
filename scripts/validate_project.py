@@ -93,7 +93,7 @@ inputs = {'source_sha256': digest(CONFIG), 'prepared_sha256': digest(PREPARED),
 preflight = load(REPORTS / 'verification-preflight.json')
 assert preflight['success'] and not preflight['browser_errors'] and not preflight['live_roundtrips']
 assert preflight['inputs'] == inputs, 'Rerun browser preflight after changing inputs'
-assert len(preflight['screenshots']) == 16 and len(preflight['simulated_circuits']) == 13
+assert len(preflight['screenshots']) == 20 and len(preflight['simulated_circuits']) == 13
 assert [f['floor'] for f in preflight['model_only_floors']] == [4]
 assert all(f['no_entity_bindings'] and f['no_device_controls'] and f['no_service_calls'] for f in preflight['model_only_floors'])
 assert len(preflight['opening_sensors']) == 2 and len(preflight['all_off'][2]['targets']) == 5
@@ -101,7 +101,7 @@ assert preflight['balcony_corridor_mapping']['balcony'] == third[3]['entity']
 assert preflight['balcony_corridor_mapping']['corridor'] == third[4]['entity']
 report = {'success': True, 'approved_checksums_verified': args.approved, 'standalone_models_verified': 4,
           'total_lights': 13, 'read_only_contacts': 2, 'model_only_floors': [4], 'active_images': images,
-          'juan_blue_red_ratios': colours, 'responsive_screenshots': 16, 'physical_device_operations': 0}
+          'juan_blue_red_ratios': colours, 'responsive_screenshots': 20, 'physical_device_operations': 0}
 if args.hosted or args.published:
     import requests
     manifest = load(DASHBOARD / 'upload-manifest.json')
@@ -124,7 +124,7 @@ if args.published:
     browser = load(REPORTS / 'verification-report.json')
     assert browser['success'] and browser['mode'] == 'deployed' and browser['inputs'] == inputs
     assert not browser['browser_errors'] and not browser['live_roundtrips']
-    assert len(browser['screenshots']) == 16 and len(browser['simulated_circuits']) == 13
+    assert len(browser['screenshots']) == 20 and len(browser['simulated_circuits']) == 13
     assert browser['model_only_floors'] == preflight['model_only_floors']
     if args.approved:
         assert remote['config_hash'] == approved['dashboard_hash']

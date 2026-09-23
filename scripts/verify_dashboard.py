@@ -24,6 +24,8 @@ report={'mode':'local preflight' if PREVIEW else 'deployed','screenshots':[],'si
         'inputs':{key:hashlib.sha256(path.read_bytes()).hexdigest() for key,path in [('source_sha256',CONFIG),('prepared_sha256',PREPARED),('runtime_sha256',DASHBOARD/'house-floorplan-card.js')]}}
 
 def screenshot(page,name):
+    if 'simulated' in name:
+        page.locator('house-floorplan-card').evaluate('c=>{c.shadowRoot.querySelector("h1").textContent=c._config.title+" · SIMULATED";}')
     page.screenshot(path=str(PREVIEWS/(prefix+name)),full_page=True)
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--disable-dev-shm-usage'])
@@ -48,7 +50,7 @@ with sync_playwright() as p:
           const c=search(document);return c && c._hass && [...c.shadowRoot.querySelectorAll('img')].every(i=>i.complete&&i.naturalWidth>0);
         }""",timeout=45000)
         page.wait_for_timeout(800)
-        attribution=card.locator('.footer span').first.inner_text()
+        attribution=card.locator('.footer span').first.text_content()
         expected_source='SketchUp + references → Blender' if num==1 else 'Reference plan → Blender'
         assert attribution==f'{expected_source} · Floor {num} / 4',attribution
         alt=card.locator('.base').get_attribute('alt')
@@ -69,7 +71,7 @@ with sync_playwright() as p:
             assert bound[3:]==['switch.third_floor_corridor_light_1','switch.third_floor_corridor_light_2']
             assert names[3:]==['Light 1 · balcony','Light 2 · corridor']
             assert card.evaluate('c=>c._config.lights.slice(3).map(l=>l.room)')==['Balcony','Corridor']
-        for label,w,h in [('desktop',1440,1050),('tablet',1024,1366),('phone',390,844),('phone-small',320,740)]:
+        for label,w,h in [('desktop',1440,1050),('tablet',1024,768),('tablet-short',1024,600),('phone',390,844),('phone-small',320,740)]:
             page.set_viewport_size({'width':w,'height':h});page.wait_for_timeout(400)
             filename=f'floor-{num}-{label}-live.png'
             screenshot(page,filename)
@@ -85,18 +87,37 @@ with sync_playwright() as p:
             }''')
             assert not overlaps,(num,label,'Overlapping touch targets / model labels',overlaps)
             report['screenshots'].append({'floor':num,'device':label,'width':w,'height':h,'file':prefix+filename,'no_horizontal_overflow':True,'hotspots_non_overlapping':True})
-        page.set_viewport_size({'width':1440,'height':1050})
+        page.set_viewport_size({'width':1440,'height':1050});page.wait_for_timeout(300)
+        assert card.locator('.visual .marker').count()==len(floor['lights'])
+        assert card.locator('.drawer:visible').count()==0
+        base_size=card.locator('.stage').evaluate('e=>e.getBoundingClientRect().width')
+        card.locator('[data-action="in"]').click()
+        assert card.locator('.stage').evaluate('e=>e.getBoundingClientRect().width')>base_size*1.15
+        canvas_box=card.locator('.canvas').bounding_box()
+        page.mouse.move(canvas_box['x']+10,canvas_box['y']+canvas_box['height']/2)
+        page.mouse.down();page.mouse.move(canvas_box['x']+10,canvas_box['y']+canvas_box['height']/2+35,steps=5);page.mouse.up()
+        assert card.evaluate('c=>c._pan.y')>0,'Zoomed render did not pan'
+        card.locator('[data-action="fit"]').click()
+        assert abs(card.locator('.stage').evaluate('e=>e.getBoundingClientRect().width')-base_size)<1
+        assert card.evaluate('c=>c._pan')=={'x':0,'y':0}
+        if card.locator('[data-action="fullscreen"]').is_visible():
+            card.locator('[data-action="fullscreen"]').click();page.wait_for_timeout(300)
+            assert page.evaluate('Boolean(document.fullscreenElement)')
+            screenshot(page,f'floor-{num}-fullscreen-live.png')
+            card.locator('[data-action="fullscreen"]').click();page.wait_for_timeout(300)
+            assert not page.evaluate('Boolean(document.fullscreenElement)')
+        report.setdefault('render_layout',[]).append({'floor':num,'in_render_controls':True,'zoom_reset':True,'fullscreen':True,'sidebar_removed':True})
         if floor.get('model_only'):
             assert not bound and not floor.get('openings')
             assert card.locator('.marker,.layer,.circuit,.opening-marker,.opening-row,.off-all,.summary,.legend').count()==0
-            assert card.locator('.connection').inner_text()=='Model only'
-            assert 'No connected devices' in card.locator('.footer').inner_text()
+            assert card.locator('.top .connection').inner_text()=='Model only'
+            assert 'No connected devices' in card.locator('.footer').text_content()
             card.locator('[data-action="labels"]').click()
             assert card.locator('.stage').evaluate('e=>e.classList.contains("labels-hidden")')
             card.locator('[data-action="labels"]').click()
             calls=card.evaluate('''async c=>{const original=c._hass,calls=[];c._hass={connected:false,states:{},callService:async(...args)=>calls.push(args)};c._update();await c._allOff();await c._toggle(0);c._hass=original;c._update();return calls;}''')
             assert calls==[], 'Model-only card attempted a device service'
-            assert card.locator('.connection').inner_text()=='Model only'
+            assert card.locator('.top .connection').inner_text()=='Model only'
             report.setdefault('model_only_floors',[]).append({'floor':num,'no_entity_bindings':True,'no_device_controls':True,'no_service_calls':True,'labels_toggle':True})
             continue
         # Freeze this one card's setter during frontend simulations. No state API writes.
@@ -113,9 +134,11 @@ with sync_playwright() as p:
             opacity=card.evaluate('(c)=>[...c.shadowRoot.querySelectorAll(".layer")].map(x=>x.style.opacity)')
             assert opacity==['1' if j==i else '0' for j in range(len(entities))],opacity
             assert card.locator('.on-count').inner_text()=='1'
+            card.locator('[data-action="controls"]').click()
             card.locator(f'.circuit[data-light="{i}"]').click()
             last=card.evaluate('c=>c.__calls[c.__calls.length-1]')
             assert last==[entity.split('.')[0],'toggle',{'entity_id':entity}],last
+            card.locator('[data-action="close-controls"]').click()
             card.locator(f'.marker[data-light="{i}"]').click()
             assert card.evaluate('c=>c.__calls[c.__calls.length-1]')==last
             report['simulated_circuits'].append({'floor':num,'entity':entity,'independent_overlay':True,'button_service_binding':True,'hotspot_service_binding':True})
@@ -148,6 +171,8 @@ with sync_playwright() as p:
                 assert card.locator(f'.opening-row[data-opening="{i}"] .state').inner_text()==label
                 assert card.evaluate('c=>[...c.shadowRoot.querySelectorAll(".layer")].map(e=>e.style.opacity)')==baseline
             for selector in ['.opening-row','.opening-marker']:
+                if selector=='.opening-row':card.locator('[data-action="controls"]').click()
+                else:card.locator('[data-action="close-controls"]').click()
                 card.locator(f'{selector}[data-opening="{i}"]').click()
                 assert card.evaluate('c=>c.__details[c.__details.length-1]')==entity
             assert card.evaluate('c=>c.__calls.length')==before_calls,'Opening indicator invoked a service!'
@@ -170,7 +195,7 @@ with sync_playwright() as p:
         card.evaluate('''c=>{for(const l of c._config.lights)c._hass.states[l.entity]={...c.__realHass.states[l.entity],state:'on'};c._hass.connected=false;c._update();}''')
         assert card.locator('.circuit:disabled').count()==len(entities)
         assert card.locator('.off-all').is_disabled()
-        assert card.locator('.connection').inner_text()=='Disconnected'
+        assert card.locator('.top .connection').inner_text()=='Disconnected'
         for i in range(len(opening_entities)):
             assert card.locator(f'.opening-row[data-opening="{i}"] .state').inner_text()=='Unavailable'
         card.evaluate('c=>{c._hass.connected=true;c._update();}')
@@ -195,6 +220,7 @@ with sync_playwright() as p:
             if initial['state'] not in ('on','off'):raise RuntimeError('Cannot safely test unavailable '+entity)
             expected='off' if initial['state']=='on' else 'on'
             try:
+                card.locator('[data-action="controls"]').click()
                 card.locator('.circuit[data-light="0"]').click()
                 deadline=time.monotonic()+20
                 while time.monotonic()<deadline:

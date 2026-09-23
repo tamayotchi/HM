@@ -20,10 +20,8 @@ with sync_playwright() as p:
     if PREVIEW:context.add_init_script((ROOT/'dashboard/house-overview-card.js').read_text())
     page=context.new_page()
     page.on('pageerror',lambda e:report['errors'].append(str(e)))
-    page.goto(URL+'/house-3d/'+('first-floor' if PREVIEW else 'all-floors'),wait_until='domcontentloaded')
-    if PREVIEW:
-        old=page.locator('house-floorplan-card');old.wait_for(state='visible',timeout=45000)
-        old.evaluate('''(old,config)=>{const c=document.createElement('house-overview-card');c.setConfig(config);c.hass=old.hass;old.replaceWith(c);}''',config)
+    # The view already exists; override its element implementation locally, not Lit-owned DOM.
+    page.goto(URL+'/house-3d/all-floors',wait_until='domcontentloaded')
     card=page.locator('house-overview-card');card.wait_for(state='visible',timeout=45000)
     assert card.evaluate('c=>c._config')==config
     for _ in range(100):
@@ -41,7 +39,7 @@ with sync_playwright() as p:
             assert metrics['bottom']<=height+1,metrics
             assert len(metrics['columns'].split())==2,metrics
             assert all(x['bottom']<=height for x in metrics['panels']),metrics
-            assert all(x['statusScroll']<=x['statusClient']+1 for x in metrics['panels']),metrics
+            assert card.locator('.status:visible').count()==0,'Status drawers must not consume render space'
         filename=f"overview-{'preflight' if PREVIEW else 'published'}-{width}x{height}.png"
         page.screenshot(path=str(ROOT/'build/previews'/filename),full_page=True)
         report['screenshots'].append({'file':filename,'width':width,'height':height,'metrics':metrics})
@@ -53,6 +51,19 @@ with sync_playwright() as p:
         card.locator('.fullscreen').click();page.wait_for_timeout(300)
         assert not page.evaluate('Boolean(document.fullscreenElement)')
         report['fullscreen']=True
+    # Zoom uses the same transform for every image layer and can be reset without navigation.
+    initial=card.locator('.stage').first.evaluate('e=>e.getBoundingClientRect().width')
+    card.locator('[data-zoom="in"]').click()
+    assert card.locator('.stage').first.evaluate('e=>e.getBoundingClientRect().width')>initial*1.15
+    visual_box=card.locator('.visual').first.bounding_box()
+    page.mouse.move(visual_box['x']+20,visual_box['y']+visual_box['height']/2)
+    page.mouse.down();page.mouse.move(visual_box['x']+20,visual_box['y']+visual_box['height']/2+30,steps=5);page.mouse.up()
+    assert card.evaluate('c=>c._tiles[0].pan.y')>0
+    assert page.url.endswith('/house-3d/all-floors'),'Dragging navigated away'
+    card.locator('[data-zoom="fit"]').click()
+    assert abs(card.locator('.stage').first.evaluate('e=>e.getBoundingClientRect().width')-initial)<1
+    assert card.evaluate('c=>c._tiles[0].pan')=={'x':0,'y':0}
+    report['zoom_reset']=True
     # Freeze HA inputs; all remaining state changes are local and service calls are trapped.
     card.evaluate('''c=>{c.__real=c.hass;Object.defineProperty(c,'hass',{configurable:true,get:()=>c._hass,set:()=>{}});c.__calls=[];c.__details=[];c.addEventListener('hass-more-info',e=>{e.stopPropagation();c.__details.push(e.detail.entityId);});c._hass={...c.__real,connected:true,states:structuredClone(c.__real.states),callService:(...a)=>{c.__calls.push(a);throw Error('Overview must not call services');}};}''')
     bindings=card.evaluate('c=>c._config.floors.flatMap(f=>f.lights.map(l=>l.entity))')
@@ -61,6 +72,7 @@ with sync_playwright() as p:
         assert card.evaluate('c=>[...c.shadowRoot.querySelectorAll(".layer")].map(e=>e.style.opacity)')==['1' if e==entity else '0' for e in bindings]
         assert card.locator('.global').inner_text().startswith('1 / 13 lights on')
     for floor in range(3):
+        card.locator(f'[data-floor="{floor}"] .status-toggle').click()
         for j in range(card.locator(f'[data-floor="{floor}"] [data-light]').count()):
             card.locator(f'[data-floor="{floor}"] [data-light="{j}"]').click()
             assert card.evaluate('c=>c.__details.at(-1)')==config['floors'][floor]['lights'][j]['entity']
