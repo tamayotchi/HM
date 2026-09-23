@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CACHE_DIR="$HOME/.cache/hm"
+LOG_FILE="$CACHE_DIR/ha-mcp-web.log"
+SERVER_HOST="127.0.0.1"
+SERVER_PORT="8086"
+STARTED_SERVER_PID=""
+
+require_cmd() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "hm: required command not found: $1" >&2
+    exit 1
+  fi
+}
+
+start_server() {
+  require_cmd uvx
+  mkdir -p "$CACHE_DIR"
+
+  if [[ -z "${HOMEASSISTANT_URL:-}" || -z "${HOMEASSISTANT_TOKEN:-}" ]]; then
+    echo "hm: HOMEASSISTANT_URL or HOMEASSISTANT_TOKEN not exported" >&2
+    exit 1
+  fi
+
+  if pgrep -f "[h]a-mcp-web" >/dev/null 2>&1; then
+    echo "hm: reusing existing Home Assistant MCP web server" >&2
+    wait_for_server
+    return 0
+  fi
+
+  echo "hm: starting temporary Home Assistant MCP web server..." >&2
+  uvx --from ha-mcp@latest ha-mcp-web >>"$LOG_FILE" 2>&1 &
+  STARTED_SERVER_PID="$!"
+  wait_for_server
+}
+
+wait_for_server() {
+  local i
+  for i in {1..50}; do
+    if (echo >"/dev/tcp/$SERVER_HOST/$SERVER_PORT") >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 0.2
+  done
+
+  echo "hm: Home Assistant MCP web server did not become ready on $SERVER_HOST:$SERVER_PORT" >&2
+  echo "hm: log: $LOG_FILE" >&2
+  exit 1
+}
+
+cleanup() {
+  if [[ -n "$STARTED_SERVER_PID" ]] && kill -0 "$STARTED_SERVER_PID" >/dev/null 2>&1; then
+    echo "hm: stopping temporary Home Assistant MCP web server..." >&2
+    kill "$STARTED_SERVER_PID" >/dev/null 2>&1 || true
+    wait "$STARTED_SERVER_PID" 2>/dev/null || true
+  fi
+}
+
+build_prompt() {
+  local base="Use the Home Assistant MCP server named 'home-assistant' in this session. Reconnect it if needed, then help me with my Home Assistant instance."
+  if (($# == 0)); then
+    printf "%s Ask me what I want to do.\n" "$base"
+  else
+    printf "%s My first request is: %s\n" "$base" "$*"
+  fi
+}
+
+main() {
+  trap cleanup EXIT INT TERM HUP
+
+  require_cmd pi
+  start_server
+
+  if [[ "${HM_NO_CHAT:-0}" == "1" ]]; then
+    echo "hm: Home Assistant MCP server ready. Log: $LOG_FILE"
+    exit 0
+  fi
+
+  # Run pi from this wrapper's directory so the local .pi/settings.json and
+  # .pi/mcp.json are loaded only for hm, not from the main ~/.pi config.
+  cd "$SCRIPT_DIR"
+  pi --approve "$(build_prompt "$@")"
+}
+
+main "$@"

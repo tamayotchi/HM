@@ -1,0 +1,23 @@
+# Public showcase allowlist. Everything else stays local by default.
+# Ignoring is not encryption and does not remove previously tracked files.
+*
+!/.gitignore
+!/README.md
+!/hm
+
+!/.pi/
+!/.pi/mcp.json
+!/.pi/settings.json
+
+!/dashboard/
+!/dashboard/house-floorplan-card.js
+
+!/docs/
+!/docs/images/
+!/docs/images/first-floor-mini-kitchen.png
+!/docs/images/second-floor-bathroom.png
+!/docs/images/third-floor-corridor.png
+!/docs/bmw-x4/
+!/docs/bmw-x4/README.md
+!/docs/bmw-x4/FileInfo.dat
+!/docs/bmw-x4/info.json
