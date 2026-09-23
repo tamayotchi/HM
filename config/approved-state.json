@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "description": "Current user-approved house, not a historical backup. Refresh only after intentional changes are approved.",
+  "dashboard_hash": "d4c0352a3d4b21f3",
+  "models": {
+    "1": {
+      "scene": "Floor 1",
+      "objects": 470,
+      "object_digest": "7ca6cf180704fb25915f8b183645f0fb58a2512014436b9e086561b13b9c34a9",
+      "world_digest": "e3cdb5b101f486dea9dcd5ae751a12f4be1111abc7949d9276f103d9890aa5aa",
+      "camera": "Floor 1 camera",
+      "render": {
+        "engine": "CYCLES",
+        "resolution_x": 1400,
+        "resolution_y": 1400,
+        "resolution_percentage": 100,
+        "film_transparent": true
+      },
+      "view": {
+        "view_transform": "AgX",
+        "look": "AgX - Medium High Contrast",
+        "exposure": 0.15000000596046448,
+        "gamma": 1.0
+      }
+    },
+    "2": {
+      "scene": "Floor 2",
+      "objects": 617,
+      "object_digest": "4b087186ea0fb606d4b466a68540771496d0196d2813f778f9db4ec096057adc",
+      "world_digest": "e3cdb5b101f486dea9dcd5ae751a12f4be1111abc7949d9276f103d9890aa5aa",
+      "camera": "Floor 2 camera.001",
+      "render": {
+        "engine": "CYCLES",
+        "resolution_x": 1400,
+        "resolution_y": 1400,
+        "resolution_percentage": 100,
+        "film_transparent": true
+      },
+      "view": {
+        "view_transform": "AgX",
+        "look": "AgX - Medium High Contrast",
+        "exposure": 0.15000000596046448,
+        "gamma": 1.0
+      }
+    },
+    "3": {
+      "scene": "Floor 3",
+      "objects": 475,
+      "object_digest": "c0a4edbeeeea5c992c749eedbf6f66e4050110243e0dce9b23889389dcf1d5fa",
+      "world_digest": "e3cdb5b101f486dea9dcd5ae751a12f4be1111abc7949d9276f103d9890aa5aa",
+      "camera": "Floor 3 camera",
+      "render": {
+        "engine": "CYCLES",
+        "resolution_x": 1400,
+        "resolution_y": 1400,
+        "resolution_percentage": 100,
+        "film_transparent": true
+      },
+      "view": {
+        "view_transform": "AgX",
+        "look": "AgX - Medium High Contrast",
+        "exposure": 0.15000000596046448,
+        "gamma": 1.0
+      }
+    },
+    "4": {
+      "scene": "Floor 4",
+      "objects": 460,
+      "object_digest": "438790c1fd24a79399c95d96f1ae06e295d1f015673cce4885206618e1279397",
+      "world_digest": "1522a80ec03ad6476d364f1129beb995e28ffac3702fe6c67432da61e2de611f",
+      "camera": "Floor 4 camera",
+      "render": {
+        "engine": "CYCLES",
+        "resolution_x": 1400,
+        "resolution_y": 1400,
+        "resolution_percentage": 100,
+        "film_transparent": true
+      },
+      "view": {
+        "view_transform": "AgX",
+        "look": "AgX - Medium High Contrast",
+        "exposure": 0.15000000596046448,
+        "gamma": 1.0
+      }
+    }
+  },
+  "files": {
+    "floors/first-floor/model.blend": "721c6369f8ba8e31433d7e514d0128d14be520e17dfb7f06af790b5deec7f4fa",
+    "floors/second-floor/model.blend": "45ce8287377c3bc136862449b765ee0072ec29a5977259f32971b03fa940c122",
+    "floors/third-floor/model.blend": "aaef3067cbda38f9860c022432bd264bd7be1163e6d7ebd2c4a3bfcd4c9ad2de",
+    "dashboard/images/floor-1-base.png": "b9d80961b01715e6bd293293c84b32340bfd7a8a3f93cbdafc1f9e9710599b5a",
+    "dashboard/images/floor-1-entrance-light.png": "36f53e08c7bd59e5b0ed013861a88447f762d6977067ec367584a724d0abc71e",
+    "dashboard/images/floor-1-mini-kitchen-light.png": "0ec40c4e8cf450cfb11c3f547c9807192eaeb3e037daba62dd58168ddc755bd8",
+    "dashboard/images/floor-2-base.png": "41c26d1b81682922d997954513224e8acfe36df3d6491c0b4202a4c4b270a57c",
+    "dashboard/images/floor-2-kitchen-1-light.png": "2bf7bed4ede50a66254c005005e0e7ea504734328dfd66511766fe249c9c43a7",
+    "dashboard/images/floor-2-kitchen-2-light.png": "12b07c9493ddd9e549a46d9928f54109e4f7ed5be6587bfeddcd76ccc811107c",
+    "dashboard/images/floor-2-lorena-room-light.png": "f1d3d5d866e4bcd392458b3fea7b1e8e4f30032f4b1b00edffde3421bd18f6d7",
+    "dashboard/images/floor-2-bathroom-1-light.png": "d7c6f329c4a12700f8d304da5182b7f805cc55ebb13de758448680a75e8562d9",
+    "dashboard/images/floor-2-bathroom-2-light.png": "980f9b26da5a6a4c0335e82ae8a66fc328c6f4afe96d8aeaf1929cce8f99812f",
+    "dashboard/images/floor-2-bathroom-3-light.png": "7ebd454bd2461eb1e70fc82f79027a065d4559bbd1c5f05e69cc13b52013e22c",
+    "dashboard/images/floor-3-base.png": "08d5b4b2b45ea592772cc311cc0a7b9f682b57e38135fefd541d1c35d75b8bd9",
+    "dashboard/images/floor-3-alejandro-room-light.png": "8ffba06a77075f4fb8ffa5b0f4c91be4a300668168194544c79f172df9ff60fc",
+    "dashboard/images/floor-3-juan-neutral-light.png": "77cbd15460bc3f0eb686f908e961436178c9861fbc25b6c6048c55b33cf6fac5",
+    "dashboard/images/floor-3-juan-warm-light.png": "512576cb11ed24904b3d26576c8a205c8209993ace20f6dac5161d74909a7e94",
+    "dashboard/images/floor-3-balcony-light.png": "5dc0fb6bc650c6fac5dfcd0b841b49a349c514689b15dd41cd10cfb8f82dc416",
+    "dashboard/images/floor-3-corridor-2-light.png": "eb02a34ce638690fa9e7fab6b6d0d011b439beb6c768b61ba33f9f0b2bb4c1a9",
+    "dashboard/house-floorplan-card.js": "cee907dc572d2afb07aa5554228e8ee1276f4015a887e7c93504128af2030f88",
+    "dashboard/dashboard.json": "4f74f26f0d79e535e3b68119e1ac5494568a99ef87ac2b954bc7a0d1e91bdc4f",
+    "config/lighting-map.json": "0034bf50e8bc8906b68f428481d9beb521ccfe6347131a2d6ed74e7dd8cecf45",
+    "floors/fourth-floor/model.blend": "041bd79b6b26f1104e8d289017049ecd83825d647301f1536d14908c61b49ddd",
+    "dashboard/images/floor-4-base.png": "e853354d70c6baf16f42747e593a91d0c7db4c3ad73fb2fe13381e94267923d3"
+  },
+  "bindings": {
+    "1": {
+      "lights": [
+        "light.first_floor_front_door_light",
+        "switch.first_floor_mini_kitchen_light"
+      ],
+      "contacts": [
+        "binary_sensor.first_floor_front_door_sensor",
+        "binary_sensor.first_floor_garage_door"
+      ]
+    },
+    "2": {
+      "lights": [
+        "light.second_floor_kitchen_light_1",
+        "light.second_floor_kitchen_light_2",
+        "switch.lorena_room_light",
+        "light.lorena_bathroom_light_1",
+        "light.lorena_bathroom_light_2",
+        "light.lorena_bathroom_light_3"
+      ],
+      "contacts": []
+    },
+    "3": {
+      "lights": [
+        "switch.alejandro_room_light",
+        "switch.juan_room_light_1",
+        "switch.juan_room_light_2",
+        "switch.third_floor_corridor_light_1",
+        "switch.third_floor_corridor_light_2"
+      ],
+      "contacts": []
+    },
+    "4": {
+      "lights": [],
+      "contacts": []
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "images": {
+    "floor-1-base.png": {
+      "sha256": "b9d80961b01715e6bd293293c84b32340bfd7a8a3f93cbdafc1f9e9710599b5a",
+      "url": "/api/image/serve/d39d461f51a7b8d0fb4c99d0d65f2201/original",
+      "id": "d39d461f51a7b8d0fb4c99d0d65f2201",
+      "bytes": 966609
+    },
+    "floor-1-entrance-light.png": {
+      "sha256": "36f53e08c7bd59e5b0ed013861a88447f762d6977067ec367584a724d0abc71e",
+      "url": "/api/image/serve/b0f646412b312bea3c80d1ae03a70b50/original",
+      "id": "b0f646412b312bea3c80d1ae03a70b50",
+      "bytes": 796513
+    },
+    "floor-1-mini-kitchen-light.png": {
+      "sha256": "0ec40c4e8cf450cfb11c3f547c9807192eaeb3e037daba62dd58168ddc755bd8",
+      "url": "/api/image/serve/d54c84b3c48f87a80edc5a48b56e2e40/original",
+      "id": "d54c84b3c48f87a80edc5a48b56e2e40",
+      "bytes": 340636
+    },
+    "floor-2-base.png": {
+      "sha256": "41c26d1b81682922d997954513224e8acfe36df3d6491c0b4202a4c4b270a57c",
+      "url": "/api/image/serve/61f58c651fcf49312cdae3cf5ba34223/original",
+      "id": "61f58c651fcf49312cdae3cf5ba34223",
+      "bytes": 969745
+    },
+    "floor-2-kitchen-1-light.png": {
+      "sha256": "2bf7bed4ede50a66254c005005e0e7ea504734328dfd66511766fe249c9c43a7",
+      "url": "/api/image/serve/abcfe042057d38c02da5bd5f4a672e43/original",
+      "id": "abcfe042057d38c02da5bd5f4a672e43",
+      "bytes": 744098
+    },
+    "floor-2-kitchen-2-light.png": {
+      "sha256": "12b07c9493ddd9e549a46d9928f54109e4f7ed5be6587bfeddcd76ccc811107c",
+      "url": "/api/image/serve/3adfb0db1de43d738571856861ace302/original",
+      "id": "3adfb0db1de43d738571856861ace302",
+      "bytes": 274680
+    },
+    "floor-2-lorena-room-light.png": {
+      "sha256": "f1d3d5d866e4bcd392458b3fea7b1e8e4f30032f4b1b00edffde3421bd18f6d7",
+      "url": "/api/image/serve/faad1a56f1e3e3dbcbf7e535a77a7ded/original",
+      "id": "faad1a56f1e3e3dbcbf7e535a77a7ded",
+      "bytes": 623068
+    },
+    "floor-2-bathroom-1-light.png": {
+      "sha256": "d7c6f329c4a12700f8d304da5182b7f805cc55ebb13de758448680a75e8562d9",
+      "url": "/api/image/serve/000d7aac1aaf5b7bf816cabbe923e5c3/original",
+      "id": "000d7aac1aaf5b7bf816cabbe923e5c3",
+      "bytes": 652210
+    },
+    "floor-2-bathroom-2-light.png": {
+      "sha256": "980f9b26da5a6a4c0335e82ae8a66fc328c6f4afe96d8aeaf1929cce8f99812f",
+      "url": "/api/image/serve/2438b9e8828d6616eda8ad06120196d8/original",
+      "id": "2438b9e8828d6616eda8ad06120196d8",
+      "bytes": 572230
+    },
+    "floor-2-bathroom-3-light.png": {
+      "sha256": "7ebd454bd2461eb1e70fc82f79027a065d4559bbd1c5f05e69cc13b52013e22c",
+      "url": "/api/image/serve/dbf20175b1a7919a8f4c6b679e09c636/original",
+      "id": "dbf20175b1a7919a8f4c6b679e09c636",
+      "bytes": 487111
+    },
+    "floor-3-base.png": {
+      "sha256": "08d5b4b2b45ea592772cc311cc0a7b9f682b57e38135fefd541d1c35d75b8bd9",
+      "url": "/api/image/serve/068990a6cb44e1d888a4175abfb48185/original",
+      "id": "068990a6cb44e1d888a4175abfb48185",
+      "bytes": 877366
+    },
+    "floor-3-alejandro-room-light.png": {
+      "sha256": "8ffba06a77075f4fb8ffa5b0f4c91be4a300668168194544c79f172df9ff60fc",
+      "url": "/api/image/serve/a1efc7543ec1cfa4f7fb739b839e10ea/original",
+      "id": "a1efc7543ec1cfa4f7fb739b839e10ea",
+      "bytes": 549368
+    },
+    "floor-3-juan-neutral-light.png": {
+      "sha256": "77cbd15460bc3f0eb686f908e961436178c9861fbc25b6c6048c55b33cf6fac5",
+      "url": "/api/image/serve/1789907c6e4b918796982138ed479b93/original",
+      "id": "1789907c6e4b918796982138ed479b93",
+      "bytes": 633091
+    },
+    "floor-3-juan-warm-light.png": {
+      "sha256": "512576cb11ed24904b3d26576c8a205c8209993ace20f6dac5161d74909a7e94",
+      "url": "/api/image/serve/51c3c2e265e41866a99069315e611620/original",
+      "id": "51c3c2e265e41866a99069315e611620",
+      "bytes": 605390
+    },
+    "floor-3-balcony-light.png": {
+      "sha256": "5dc0fb6bc650c6fac5dfcd0b841b49a349c514689b15dd41cd10cfb8f82dc416",
+      "url": "/api/image/serve/9efaae86bf20599eef64e556206cb7bc/original",
+      "id": "9efaae86bf20599eef64e556206cb7bc",
+      "bytes": 391851
+    },
+    "floor-3-corridor-2-light.png": {
+      "sha256": "eb02a34ce638690fa9e7fab6b6d0d011b439beb6c768b61ba33f9f0b2bb4c1a9",
+      "url": "/api/image/serve/089a0d9e43df7b9f15bfb0491af6ccb0/original",
+      "id": "089a0d9e43df7b9f15bfb0491af6ccb0",
+      "bytes": 665548
+    },
+    "floor-4-base.png": {
+      "sha256": "e853354d70c6baf16f42747e593a91d0c7db4c3ad73fb2fe13381e94267923d3",
+      "url": "/api/image/serve/7dd3095af153bfacaf522f18d5e47b1e/original",
+      "id": "7dd3095af153bfacaf522f18d5e47b1e",
+      "bytes": 1088270
+    }
+  },
+  "server": "http://192.168.1.13:8123",
+  "resource_id": "f2fdf828b5194c9b8e84c2b13a818682",
+  "overview_resource_id": "29e8596ade0d4b889df1c46fd9b4fa8c"
+}

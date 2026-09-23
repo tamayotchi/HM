@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Small wrapper: always resolve project paths and isolate Blender's Python.
+set -euo pipefail
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+command="${1:-help}"
+if (($#)); then shift; fi
+blender_run() {
+  env -u PYTHONHOME -u PYTHONPATH PATH=/usr/bin:/bin blender \
+    -b --factory-startup -t 8 --python-exit-code 1 --python "$@"
+}
+case "$command" in
+  models) blender_run scripts/validate_models.py -- "$@" ;;
+  render) if (($#)); then export FP_FLOOR="$1"; fi; blender_run scripts/render_lighting.py ;;
+  project) export FP_PROJECT_ONLY=1; blender_run scripts/render_lighting.py ;;
+  prepare) .venv/bin/python scripts/prepare_assets.py "$@" ;;
+  preview) .venv/bin/python scripts/verify_dashboard.py --preview "$@" ;;
+  verify) .venv/bin/python scripts/verify_dashboard.py "$@" ;;
+  check) .venv/bin/python scripts/validate_project.py "$@" ;;
+  help|-h|--help)
+    printf '%s\n' 'Usage: ./scripts/floorplan COMMAND [OPTIONS]' \
+      '  models [--approved]   Validate standalone Blender files' \
+      '  render [1,2,3,4]      Render all or selected floors; never save models' \
+      '  project               Refresh marker projections only' \
+      '  prepare               Derive dashboard PNGs from current raw renders' \
+      '  preview               Read-only local browser preflight (HA credentials)' \
+      '  verify                Verify deployed UI; mocked services by default' \
+      '  check [--approved] [--published]  Local/hosted validation' \
+      'Publishing is deliberately separate; see README.md.' ;;
+  *) printf 'Unknown command: %s\n' "$command" >&2; exit 2 ;;
+esac

@@ -1,0 +1,591 @@
+{
+  "layout_source": "Original SketchUp plus revised floor plans, user corrections, and stair photograph",
+  "mapping_status": "Thirteen verified independent on/off circuits across three floors. Juan Light 1 is user-confirmed neutral; Light 2 warm. Render colours do not imply HA colour-temperature support. Kitchen 2 remains local bar-pendant lighting. Other numbered fixture locations are illustrative. Two first-floor contacts are read-only.",
+  "floors": [
+    {
+      "floor": 1,
+      "model_source": "SketchUp + references \u2192 Blender",
+      "image_alt": "Revised SketchUp first-floor cutaway: full-size grey BMW X4, open mini kitchen top-left, 210 cm wide by 100 cm deep bathroom with sliding door, wood-and-steel stairs top-right with a horizontal garden along the rear wall underneath, original garage and entrance",
+      "title": "First floor",
+      "subtitle": "Garage \u00b7 Mini kitchen \u00b7 Bathroom \u00b7 Stairs & garden",
+      "note": "One shared light softly illuminates the car and front door. Contacts are read-only. Bathroom: 210 cm across × 100 cm deep. BMW/door poses are illustrative, not surveyed clearances. No separate bathroom circuit.",
+      "labels": [
+        {
+          "text": "GARAGE",
+          "position": [
+            21.9,
+            -22.7,
+            0.4
+          ]
+        },
+        {
+          "text": "MINI KITCHEN",
+          "position": [
+            20.87,
+            -19.1,
+            0.5
+          ],
+          "screen_position": {
+            "x": 52,
+            "y": 11
+          }
+        },
+        {
+          "text": "BATHROOM",
+          "position": [
+            22.37,
+            -19.1,
+            0.1
+          ],
+          "screen_position": {
+            "x": 71.5,
+            "y": 22.5
+          }
+        },
+        {
+          "text": "STAIRS",
+          "position": [
+            24.9,
+            -20.5,
+            0.1
+          ],
+          "screen_position": {
+            "x": 83,
+            "y": 38
+          }
+        },
+        {
+          "text": "MINI GARDEN",
+          "position": [
+            24.49,
+            -19.5,
+            0.15
+          ],
+          "screen_position": {
+            "x": 79,
+            "y": 29.5
+          }
+        },
+        {
+          "text": "ENTRANCE",
+          "position": [
+            24.65,
+            -26.2,
+            0.05
+          ],
+          "screen_position": {
+            "x": 30.5,
+            "y": 82
+          }
+        }
+      ],
+      "lights": [
+        {
+          "key": "entrance",
+          "entity": "light.first_floor_front_door_light",
+          "name": "Car & front door",
+          "room": "Garage & entrance",
+          "emitters": [
+            {
+              "position": [23.05, -23.8, 2.35],
+              "watts": 45,
+              "size": 0.8
+            },
+            {
+              "position": [24.65, -25.28, 2.3],
+              "watts": 8,
+              "size": 0.65
+            }
+          ],
+          "marker_position": [
+            23.6,
+            -22.3,
+            0.35
+          ],
+          "mapping_source": "User-confirmed shared car/front-door circuit. Main wash plus weak door fill are render emitters on the same relay, not additional HA lights or measured electrical power"
+        },
+        {
+          "key": "mini-kitchen",
+          "entity": "switch.first_floor_mini_kitchen_light",
+          "name": "Ceiling light",
+          "room": "Mini kitchen",
+          "position": [
+            20.87,
+            -19.15,
+            2.3
+          ],
+          "marker_position": [
+            20.87,
+            -19.32,
+            0.75
+          ],
+          "watts": 175,
+          "size": 0.6
+        }
+      ],
+      "openings": [
+        {
+          "entity": "binary_sensor.first_floor_front_door_sensor",
+          "name": "Front door",
+          "kind": "door",
+          "marker_position": [
+            24.23,
+            -24.9,
+            0.85
+          ]
+        },
+        {
+          "entity": "binary_sensor.first_floor_garage_door",
+          "name": "Garage",
+          "kind": "garage",
+          "marker_position": [
+            22.12,
+            -25.34,
+            0.75
+          ]
+        }
+      ],
+      "model_file": "floors/first-floor/model.blend",
+      "scene": "Floor 1"
+    },
+    {
+      "floor": 2,
+      "layout_source": "floors/second-floor/references",
+      "model_source": "Reference plan \u2192 Blender",
+      "image_alt": "Revised 7 by 5 metre second-floor cutaway: stairs top-right, Lorena bedroom top-left, connected kitchen on the left, living area at the front, bathroom on the right",
+      "coordinate_origin": [
+        2.65,
+        3.85,
+        0
+      ],
+      "coordinate_scale": [
+        0.9208103130755064,
+        0.89171974522293,
+        1
+      ],
+      "title": "Second floor",
+      "subtitle": "Kitchen \u00b7 Living room \u00b7 Lorena room \u00b7 Bathroom",
+      "note": "Bar pendants are soft, local lighting\u2014not a living-room ceiling light. Other numbered fixture positions remain provisional.",
+      "labels": [
+        {
+          "text": "KITCHEN",
+          "position": [
+            0.8,
+            3.23,
+            0.96
+          ],
+          "screen_position": {
+            "x": 24,
+            "y": 38
+          }
+        },
+        {
+          "text": "LIVING ROOM",
+          "position": [
+            1.6,
+            1.0,
+            0.25
+          ]
+        },
+        {
+          "text": "LORENA ROOM",
+          "position": [
+            1.68,
+            7.23,
+            0.25
+          ],
+          "screen_position": {
+            "x": 60,
+            "y": 18.5
+          }
+        },
+        {
+          "text": "BATHROOM",
+          "position": [
+            4.34,
+            3.15,
+            0.12
+          ],
+          "screen_position": {
+            "x": 60,
+            "y": 67.5
+          }
+        },
+        {
+          "text": "STAIRS",
+          "position": [
+            3.55,
+            5.35,
+            0.05
+          ]
+        }
+      ],
+      "lights": [
+        {
+          "key": "kitchen-1",
+          "entity": "light.second_floor_kitchen_light_1",
+          "name": "Light 1",
+          "room": "Kitchen",
+          "marker_position": [
+            1.05,
+            3.69,
+            0.85
+          ],
+          "emitters": [
+            {
+              "position": [
+                1.03,
+                3.65,
+                2.42
+              ],
+              "watts": 105,
+              "size": 0.85
+            },
+            {
+              "position": [
+                1.0,
+                4.02,
+                1.55
+              ],
+              "watts": 26,
+              "size": 0.58
+            },
+            {
+              "position": [
+                0.58,
+                3.5,
+                1.55
+              ],
+              "watts": 20,
+              "size": 0.4
+            }
+          ]
+        },
+        {
+          "key": "kitchen-2",
+          "entity": "light.second_floor_kitchen_light_2",
+          "name": "Bar pendants",
+          "room": "Kitchen",
+          "marker_position": [
+            1.3,
+            2.12,
+            0.46
+          ],
+          "emitters": [
+            {
+              "position": [
+                0.91,
+                2.755,
+                1.665
+              ],
+              "watts": 3,
+              "size": 0.1,
+              "spread": 70
+            },
+            {
+              "position": [
+                1.52,
+                2.755,
+                1.665
+              ],
+              "watts": 3,
+              "size": 0.1,
+              "spread": 70
+            }
+          ]
+        },
+        {
+          "key": "lorena-room",
+          "entity": "switch.lorena_room_light",
+          "name": "Ceiling light",
+          "room": "Lorena room",
+          "position": [
+            1.65,
+            6.19,
+            2.42
+          ],
+          "marker_position": [
+            1.57,
+            6.15,
+            0.67
+          ],
+          "watts": 150,
+          "size": 1.05
+        },
+        {
+          "key": "bathroom-1",
+          "entity": "light.lorena_bathroom_light_1",
+          "name": "Light 1",
+          "room": "Lorena bathroom",
+          "position": [
+            4.64,
+            4.02,
+            2.24
+          ],
+          "marker_position": [
+            4.68,
+            4.04,
+            0.87
+          ],
+          "watts": 42,
+          "size": 0.5
+        },
+        {
+          "key": "bathroom-2",
+          "entity": "light.lorena_bathroom_light_2",
+          "name": "Light 2",
+          "room": "Lorena bathroom",
+          "position": [
+            4.67,
+            3.25,
+            2.24
+          ],
+          "marker_position": [
+            4.65,
+            3.24,
+            0.54
+          ],
+          "watts": 40,
+          "size": 0.45
+        },
+        {
+          "key": "bathroom-3",
+          "entity": "light.lorena_bathroom_light_3",
+          "name": "Light 3",
+          "room": "Lorena bathroom",
+          "position": [
+            4.74,
+            1.99,
+            2.24
+          ],
+          "marker_position": [
+            4.73,
+            2.06,
+            0.15
+          ],
+          "watts": 44,
+          "size": 0.5
+        }
+      ],
+      "model_file": "floors/second-floor/model.blend",
+      "scene": "Floor 2"
+    },
+    {
+      "floor": 3,
+      "model_source": "Reference plan \u2192 Blender",
+      "image_alt": "Reference-led third-floor cutaway: Alejandro rear/top-left, Juan bed bottom-left and black desk/chair bottom-right, left window section white wall and right section glazed, stairs top-right, bathroom right, wood sliding wardrobes and white balcony half-walls",
+      "coordinate_origin": [
+        2.65,
+        3.85,
+        0
+      ],
+      "coordinate_scale": [
+        0.9208103130755064,
+        0.89171974522293,
+        1
+      ],
+      "title": "Third floor",
+      "subtitle": "Alejandro \u00b7 Juan \u00b7 Corridor \u00b7 Bathroom & balcony",
+      "note": "Juan: Light 1 neutral, Light 2 warm. Hall/balcony channels: Light 1 balcony, Light 2 corridor. All are independent on/off circuits; fixture positions are illustrative. No bathroom light is mapped.",
+      "labels": [
+        {
+          "text": "ALEJANDRO",
+          "position": [
+            1.7,
+            7.27,
+            0.4
+          ],
+          "screen_position": {
+            "x": 58,
+            "y": 11.5
+          }
+        },
+        {
+          "text": "JUAN",
+          "position": [
+            1.4,
+            3.48,
+            0.2
+          ],
+          "screen_position": {
+            "x": 48,
+            "y": 41
+          }
+        },
+        {
+          "text": "STAIRS",
+          "position": [
+            4.2,
+            6.1,
+            0.2
+          ],
+          "screen_position": {
+            "x": 80,
+            "y": 39
+          }
+        },
+        {
+          "text": "BATHROOM",
+          "position": [
+            4.7,
+            2.78,
+            0.1
+          ]
+        },
+        {
+          "text": "BALCONY",
+          "position": [
+            1.9,
+            0.5,
+            0.05
+          ],
+          "screen_position": {
+            "x": 20,
+            "y": 61.5
+          }
+        },
+        {
+          "text": "CORRIDOR",
+          "position": [
+            3.55,
+            3.65,
+            0.05
+          ]
+        }
+      ],
+      "lights": [
+        {
+          "key": "alejandro-room",
+          "entity": "switch.alejandro_room_light",
+          "name": "Ceiling light",
+          "room": "Alejandro room",
+          "position": [
+            1.6,
+            6.35,
+            2.42
+          ],
+          "marker_position": [
+            1.2,
+            6.4,
+            0.72
+          ],
+          "watts": 130,
+          "size": 0.9
+        },
+        {
+          "key": "juan-neutral",
+          "entity": "switch.juan_room_light_1",
+          "name": "Light 1 \u00b7 neutral",
+          "room": "Juan room",
+          "position": [
+            1.58,
+            2.65,
+            2.42
+          ],
+          "marker_position": [
+            0.58,
+            3.16,
+            0.65
+          ],
+          "watts": 120,
+          "size": 0.85,
+          "render_color": [
+            1.0,
+            0.92,
+            0.8
+          ],
+          "confirmed_colour": "neutral",
+          "colour_mapping_source": "Explicit user confirmation"
+        },
+        {
+          "key": "juan-warm",
+          "entity": "switch.juan_room_light_2",
+          "name": "Light 2 \u00b7 warm",
+          "room": "Juan room",
+          "position": [
+            1.58,
+            2.65,
+            2.42
+          ],
+          "marker_position": [
+            2.35,
+            2.14,
+            0.68
+          ],
+          "watts": 100,
+          "size": 0.85,
+          "render_color": [
+            1.0,
+            0.65,
+            0.33
+          ],
+          "render_intensity_source": "User requested slightly softer Juan Light 2: render power reduced from 120 to 100; no physical brightness command",
+          "confirmed_colour": "warm",
+          "colour_mapping_source": "Explicit user confirmation"
+        },
+        {
+          "key": "balcony",
+          "entity": "switch.third_floor_corridor_light_1",
+          "name": "Light 1 \u00b7 balcony",
+          "room": "Balcony",
+          "position": [
+            2.7,
+            0.69,
+            2.42
+          ],
+          "marker_position": [
+            2.7,
+            0.5,
+            0.05
+          ],
+          "watts": 65,
+          "size": 0.55,
+          "mapping_source": "Latest explicit user correction: Light 1 balcony, Light 2 corridor"
+        },
+        {
+          "key": "corridor-2",
+          "entity": "switch.third_floor_corridor_light_2",
+          "name": "Light 2 \u00b7 corridor",
+          "room": "Corridor",
+          "position": [
+            3.55,
+            3.65,
+            2.42
+          ],
+          "marker_position": [
+            3.55,
+            5.06,
+            0.15
+          ],
+          "watts": 65,
+          "size": 0.55,
+          "mapping_source": "User-confirmed Light 2 corridor; illumination centred over the CORRIDOR label position. Existing hotspot retained for compact touch clearance"
+        }
+      ],
+      "model_file": "floors/third-floor/model.blend",
+      "scene": "Floor 3"
+    },
+    {
+      "floor": 4,
+      "model_file": "floors/fourth-floor/model.blend",
+      "scene": "Floor 4",
+      "model_only": true,
+      "model_source": "Reference plan → Blender",
+      "image_alt": "Reference-led fourth-floor cutaway: laundry sink top-left with washing machine directly below, descending stairs top-right and tiled roof at the front",
+      "coordinate_origin": [2.65, 3.85, 0],
+      "coordinate_scale": [0.9208103130755064, 0.89171974522293, 1],
+      "title": "Fourth floor",
+      "subtitle": "Laundry · Stairs · Roof",
+      "note": "Model only — no connected lights, Zigbee devices or sensors. Laundry sink top-left with the washing machine directly below it. The lower/front section is a tiled roof. Layout follows your plan; finishes and dimensions are illustrative.",
+      "labels": [
+        {"text": "LAUNDRY SINK", "position": [0.80, 7.30, 1.0], "screen_position": {"x": 56, "y": 10.5}},
+        {"text": "WASHING MACHINE", "position": [0.54, 6.43, 0.9]},
+        {"text": "LAUNDRY", "position": [1.85, 5.30, 0.05]},
+        {"text": "STAIRS ↓", "position": [4.05, 6.20, -0.3]},
+        {"text": "TILED ROOF", "position": [2.55, 1.95, -0.42]}
+      ],
+      "lights": [],
+      "openings": []
+    }
+  ]
+}
