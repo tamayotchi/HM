@@ -47,11 +47,3 @@ export HOMEASSISTANT_TOKEN
 `hm` starts or reuses `ha-mcp-web`, loads the project-local MCP adapter, and stops only a server it started. An existing server retains its original connection settings. Credentials come from the environment, not committed files.
 
 **Review before running:** `--approve` trusts the local Pi package configuration; it is not a read-only sandbox. MCP can make real changes to Home Assistant, and data you ask the assistant to inspect may be sent to your chosen model provider.
-
-## Sharing & attribution
-
-The public allowlist includes this README, three clean previews, `hm`, its credential-free Pi configuration, the generic card and asset notices. **Models, original references, personal room/entity names, live configuration, render tools, logs, sessions and credentials stay local.** This is a showcase and launcher, not a turnkey copy of the private installation.
-
-Previews deliberately reveal the layout, but contain no HA sidebar, resident labels, live statuses or image metadata. Review the staged file list before publishing; do not force-add ignored files or upload the whole working directory.
-
-The first-floor render includes an **ACCA BMW X4 asset, not CC0**. See [attribution and licence records](docs/bmw-x4/README.md). Original model downloads and editable models are not included in the public file set.
