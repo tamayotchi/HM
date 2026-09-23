@@ -45,5 +45,3 @@ export HOMEASSISTANT_TOKEN
 ```
 
 `hm` starts or reuses `ha-mcp-web`, loads the project-local MCP adapter, and stops only a server it started. An existing server retains its original connection settings. Credentials come from the environment, not committed files.
-
-**Review before running:** `--approve` trusts the local Pi package configuration; it is not a read-only sandbox. MCP can make real changes to Home Assistant, and data you ask the assistant to inspect may be sent to your chosen model provider.
